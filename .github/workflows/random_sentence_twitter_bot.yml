@@ -2,7 +2,7 @@ name: random_sentence_twitter_bot
 
 on:
   schedule:
-    - cron: '0 0 * ? * * *'
+    - cron: '0 * * * *'
 
 jobs:
   random_sentence_twitter_bot-post:
