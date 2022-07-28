@@ -17,7 +17,8 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install Dependencies
         run: |
-          R -e 'install.packages('rtweet')'
-          R -e 'install.packages('glue')'
+          R -e 'install.packages("rtweet")'
+          R -e 'install.packages("glue")'
+        shell: Rscript {0}
       - name: Create and post tweet
         run: Rscript './random_sentence_generator.R'
