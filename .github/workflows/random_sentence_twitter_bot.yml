@@ -1,10 +1,10 @@
 name: random_sentence_twitter_bot
 on:
-  #schedule:
-  #  - cron: '0 * * * *'
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 * * * *'
+  #push:
+  #  branches:
+  #    - main
 
 
 jobs:
