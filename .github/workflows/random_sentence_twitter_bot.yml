@@ -18,6 +18,12 @@ jobs:
         run: Rscript -e 'install.packages("rtweet", dependencies = TRUE)'
       - name: Install glue package
         run: Rscript -e 'install.packages("glue", dependencies = TRUE)'
+      - name: Install dplyr package
+        run: Rscript -e 'install.packages("dplyr", dependencies = TRUE)'
+      - name: Install janitor package
+        run: Rscript -e 'install.packages("janitor", dependencies = TRUE)'
+      - name: Install lexicon package
+        run: Rscript -e 'install.packages("lexicon", dependencies = TRUE)'
       - name: Create and post tweet
         run: Rscript random_sentence_generator.R
 env:
