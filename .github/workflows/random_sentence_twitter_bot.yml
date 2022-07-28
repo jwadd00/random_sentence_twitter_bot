@@ -12,15 +12,12 @@ jobs:
       TWITTER_APP_CONSUMER_SECRET: ${{ secrets.TWITTER_APP_CONSUMER_SECRET }}
       TWITTER_APP_ACCESS_TOKEN: ${{ secrets.TWITTER_APP_ACCESS_TOKEN }}
       TWITTER_APP_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_APP_ACCESS_TOKEN_SECRET }}
-
     steps:
     - uses: actions/checkout@master
     - uses: r-lib/actions/setup-r@master
-
     - name: Install packages
       run: |
         R -e 'install.packages("rtweet")'
         R -e 'install.packages("glue")'
- 
       - name: Create and post tweet
         run: Rscript './random_sentence_generator.R'
