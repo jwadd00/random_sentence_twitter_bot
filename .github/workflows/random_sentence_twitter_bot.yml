@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: r-lib/actions/setup-r@master
-      - name: Install packages
-        run: Rscript -e 'install.packages(c("rtweet", "glue"))'
+      - name: Install rtweet
+        run: Rscript -e 'install.packages("rtweet")'
+      - name: Install glue
+        run: Rscript -e 'install.packages("glue")'
       - name: Create and post tweet
         run: Rscript './random_sentence_generator.R'
