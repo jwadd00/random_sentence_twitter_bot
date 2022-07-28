@@ -6,20 +6,22 @@ on:
 
 jobs:
   random_sentence_twitter_bot-post:
-    runs-on: windows-latest
+    runs-on: macos-latest
     env:
       TWITTER_APP_CONSUMER_KEY: ${{ secrets.TWITTER_APP_CONSUMER_KEY }}
       TWITTER_APP_CONSUMER_SECRET: ${{ secrets.TWITTER_APP_CONSUMER_SECRET }}
       TWITTER_APP_ACCESS_TOKEN: ${{ secrets.TWITTER_APP_ACCESS_TOKEN }}
       TWITTER_APP_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_APP_ACCESS_TOKEN_SECRET }}
+    # Load repo and install R
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
-      - name: Install Dependencies
-        run: |
-          install.packages("rtweet")
-          install.packages("glue")
-        shell: Rscript {0}
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+
+    # Set-up R
+    - name: Install packages
+      run: |
+        R -e 'install.packages("rtweet")'
+        R -e 'install.packages("glue")'
+ 
       - name: Create and post tweet
         run: Rscript './random_sentence_generator.R'
