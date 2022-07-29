@@ -18,15 +18,10 @@ token <- rtweet::rtweet_bot(
   access_secret = accessTokenSecret
 )
 
-word_filter <- eval(parse(text=Sys.getenv("BAD_WORDS")))
-
-# print env var
-print(word_filter)
-
 # nouns
 irregular_nouns <- lexicon::pos_df_irregular_nouns %>% 
   clean_names() %>%
-  filter(!singular %in% word_filter) %>% 
+  filter(!singular %in% c('child', 'panties', 'baby', 'die', 'dwarf', 'louse', 'man', 'offspring', 'person','woman', 'wife', 'beau','ovum')) %>% 
   select(singular) %>% 
   pull()
 
@@ -38,7 +33,7 @@ names <- lexicon::common_names
 
 # post
 post <- glue("Never underestimate the willingness of a ", sample(irregular_nouns, 1), " named ", sample(names, 1), " to ", sample(verbs, 1), ' ', 'a ', sample(irregular_nouns, 1),
-             "\n\n[-_-]random sentence generator built by jake\n[-_-]version 0.1 platinum deluxe 3000 \n[-_-]using: R Code and GitHub Actions\n[-_-]ideas are welcome")
+             "\n\n[-_-]random sentence generator built by jake\n[-_-]version 0.1 platinum deluxe 3000 \n[-_-]using: R Code and GitHub Actions")
 
 rtweet::post_tweet(
   status = post,
