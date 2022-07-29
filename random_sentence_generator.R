@@ -21,7 +21,7 @@ token <- rtweet::rtweet_bot(
 word_filter <- eval(parse(text=Sys.getenv("BAD_WORDS")))
 
 # print env var
-cat(word_filter)
+print(word_filter)
 
 # nouns
 irregular_nouns <- lexicon::pos_df_irregular_nouns %>% 
