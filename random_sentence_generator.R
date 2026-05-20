@@ -11,11 +11,22 @@ consumerSecret <- Sys.getenv("TWITTER_APP_CONSUMER_SECRET")
 accessToken <- Sys.getenv("TWITTER_APP_ACCESS_TOKEN")
 accessTokenSecret <- Sys.getenv("TWITTER_APP_ACCESS_TOKEN_SECRET")
 
+# Retrieve API credentials from environment variables
+api_key <- Sys.getenv("TWITTER_API_KEY")
+api_secret <- Sys.getenv("TWITTER_API_SECRET")
+access_token <- Sys.getenv("TWITTER_ACCESS_TOKEN")
+access_secret <- Sys.getenv("TWITTER_ACCESS_SECRET")
+
+# Validate that all credentials are set
+if (api_key == "" || api_secret == "" || access_token == "" || access_secret == "") {
+  stop("Missing Twitter API credentials. Please set environment variables.")
+}
+
 bot <- rtweet_bot(
-  api_key = '7Le7jaqT2SS7UODgZ5XWudXvk',
-  api_secret = 'nlZ0TqQDckxjeQfzjMQ7cIh41U0hCR8qk2vFUq9PQipUDFYq98',
-  access_token = '276697001-IkmDMp5RrQ4j71rtSj8LRTxRhCo35XV7e73YPgX5',
-  access_secret = ' SQEjuIZ5xYyD5JpoKpPoyam0XzjeW6BBKI8nh770P4jTa'
+  api_key = api_key,
+  api_secret = api_secret,
+  access_token = access_token,
+  access_secret = access_secret
 )
 
 # nouns
@@ -39,7 +50,8 @@ post
 
 rtweet::tweet_post(post)
 
-client <- rtweet_client(client_id = 'R0hPSFZOVnNiWllSYzhmTkFGQVk6MTpjaQ', app = 'Little Analysis Thing')
+client_id <- Sys.getenv("TWITTER_CLIENT_ID")
+client <- rtweet_client(client_id = client_id, app = 'Little Analysis Thing')
 client_as(client)
 client_save(client)
 auth_as(bot)
@@ -50,9 +62,10 @@ if (FALSE) {
    tweet_post()
  }
 
- rtweet_user(
-  client_id = 'R0hPSFZOVnNiWllSYzhmTkFGQVk6MTpjaQ',
-  client_secret = '3-kAksCU3bo-4-IR1P0UdBYAxs0imUpl3E4qyb20dsersJubCY'
+client_secret <- Sys.getenv("TWITTER_CLIENT_SECRET")
+rtweet_user(
+  client_id = client_id,
+  client_secret = client_secret
 )
 
 tweet_post(paste0("My first tweet with #rtweet #rstats at ", Sys.time()))
